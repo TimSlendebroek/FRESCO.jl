@@ -56,3 +56,9 @@ gm1 = canvas._gm1_itp(psin)
     jtor = FRESCO.JtoR(canvas, profile, psin)
     @test jtor ≈ -2π * (pprime + ffprime * gm1 / FRESCO.μ₀)
 end
+
+@testset "FRESCO does not need Plots" begin
+    # debug plots go through RecipesBase and only run when the caller has loaded Plots
+    @test !any(k.name == "Plots" for k in keys(Base.loaded_modules))
+    @test !FRESCO._can_plot()
+end
