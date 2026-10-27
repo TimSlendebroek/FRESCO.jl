@@ -49,7 +49,7 @@ function find_axis(canvas::Canvas; update_Ψitp::Bool=true)
             canvas.Raxis, canvas.Zaxis
         else
             println("search_axis_guess() reported error: ", e)
-            display(plot(canvas))
+            _can_plot() && display(plot(canvas))
             error("Could not find magnetic axis guess from grid and no previous axis location available")
         end
     end
@@ -75,9 +75,11 @@ function flux_bounds!(canvas::Canvas; update_Ψitp::Bool=true)
     try
         canvas.Raxis, canvas.Zaxis, canvas.Ψaxis, canvas.Ψbnd = Raxis, Zaxis, Ψaxis, Ψbnd
     catch e
-        p = plot(canvas)
-        scatter!([Raxis], [Zaxis]; markersize=8, color=:cyan)
-        display(p)
+        if _can_plot()
+            p = plot(canvas)
+            plot!([Raxis], [Zaxis]; seriestype=:scatter, markersize=8, color=:cyan)
+            display(p)
+        end
         rethrow(e)
     end
 end

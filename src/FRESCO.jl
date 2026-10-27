@@ -12,7 +12,7 @@ import DataInterpolations: DataInterpolations, ExtrapolationType
 using PolygonOps: inpolygon, centroid
 import HypergeometricFunctions: _₂F₁ as F21
 using RecipesBase
-using Plots
+import RecipesBase: plot, plot!
 using LoopVectorization: @turbo, @tturbo
 using Printf
 

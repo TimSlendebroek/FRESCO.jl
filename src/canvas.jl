@@ -334,3 +334,6 @@ end
         end
     end
 end
+
+# Plots is not a dependency: debug plots only show when the caller has loaded Plots (which implements RecipesBase.plot)
+_can_plot() = !isempty(methods(plot))

@@ -103,7 +103,7 @@ function _solve!(canvas::Canvas, profile::AbstractCurrentProfile, Nout::Int, Nin
             @printf("Iteration %d:\t%.8f\t%.8f\t%e\n", j, canvas.Ψaxis, canvas.Ψbnd - canvas.Ψaxis, error_outer)
             flush(stdout)
         end
-        sum(debug) == 2 && display(plot(canvas))
+        sum(debug) == 2 && _can_plot() && display(plot(canvas))
         if error_outer < tolerance
             converged = true
             break
